@@ -1,0 +1,79 @@
+.backdrop {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 100;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.container {
+  z-index: 101;
+  min-width: 40%;
+  max-width: 60%;
+  min-height: 50%;
+  position: relative;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+}
+
+.container h2 {
+  margin: 0;
+  padding: 15px;
+  border-radius: 12px;
+  background-color: #adb5bd;
+  border-color: #adb5bd;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  text-transform: capitalize;
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.content {
+  padding: 30px;
+  max-height: 40vh;
+  overflow: auto;
+}
+
+.contentField {
+  border-bottom: 1px solid black;
+}
+
+.contentField:last-of-type {
+  border-bottom: none;
+}
+
+.contentField p:first-of-type {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.closeImg {
+  top: 18px;
+  right: 16px;
+  cursor: pointer;
+  position: absolute;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    min-width: 90%;
+    max-width: 95%;
+    min-height: 80%;
+  }
+  .content {
+    padding: 15px;
+    max-height: 70vh;
+  }
+}

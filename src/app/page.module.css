@@ -1,0 +1,35 @@
+.container {
+  height: 100%;
+  display: grid;
+  grid-template-rows: min-content 1fr;
+}
+
+.header {
+  width: 100%;
+  padding: 30px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.category {
+  width: 100%;
+  display: flex;
+  padding: 10px;
+  color: black;
+  cursor: pointer;
+  align-items: center;
+  text-decoration: none;
+  flex-direction: column;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.category:hover > * {
+  scale: 1.05;
+}
