@@ -11,6 +11,15 @@
   text-transform: capitalize;
 }
 
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
 .items {
   gap: 15px;
   width: 100%;
@@ -41,7 +50,7 @@
 }
 
 .loadMoreBtn {
-  background-color: #ffffff;
+  background-color: white;
   border: 1px solid rgb(209, 213, 219);
   border-radius: 0.5rem;
   box-sizing: border-box;
@@ -74,6 +83,70 @@
 }
 
 .loadMoreBtn:focus-visible {
+  box-shadow: none;
+}
+
+/* Input for freefrontend */
+.formGroup {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+  width: 50%;
+}
+
+.formField {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  outline: 0;
+  font-size: 1.3rem;
+  color: white;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+.formField::placeholder {
+  color: transparent;
+}
+
+.formField:placeholder-shown ~ .formLabel {
+  font-size: 1.3rem;
+  cursor: text;
+  top: 20px;
+}
+
+.formLabel {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #9b9b9b;
+}
+
+.formField:focus ~ .formLabel {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #11998e;
+  font-weight: 700;
+}
+
+.formField:focus {
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, #11998e, #38ef7d);
+  border-image-slice: 1;
+}
+
+/* Reset input */
+.formField:required,
+.formField:invalid {
   box-shadow: none;
 }
 

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import _ from 'lodash';
 import { useModalStore } from '@/store/zustand';
 import ItemModal from '../ItemModal';
+import { useDebounce } from 'react-use';
 
 interface IListProps {
   selectedEntity: string;
@@ -29,24 +30,28 @@ const List = ({ selectedEntity, apiUrl }: IListProps) => {
     setPage((prev) => prev + 1);
   }, []);
 
-  const handleSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  }, []);
+  useDebounce(
+    () => {
+      if (search) {
+        const newItems = items.filter((item) =>
+          item.name.toLowerCase().includes(search.toLowerCase()),
+        );
+        setItems(newItems);
+      } else {
+        setItems((prev) =>
+          _.uniqWith([...prev, ...response.results], _.isEqual),
+        );
+      }
+    },
+    400,
+    [search],
+  );
 
   useEffect(() => {
     if (response && !error) {
       setItems((prev) => _.uniqWith([...prev, ...response.results], _.isEqual));
     }
   }, [error, response]);
-
-  useEffect(() => {
-    if (search) {
-      const newItems = items.filter((item) =>
-        item.name.toLowerCase().includes(search.toLowerCase()),
-      );
-      setItems(newItems);
-    }
-  }, [items, search]);
 
   if (error) {
     return (
@@ -59,7 +64,23 @@ const List = ({ selectedEntity, apiUrl }: IListProps) => {
   return (
     <div className={styles.container}>
       <ItemModal apiUrl={apiUrl} />
-      <h1>{selectedEntity}</h1>
+      <div className={styles.header}>
+        <h1>{selectedEntity}</h1>
+        <div className={styles.formGroupField}>
+          <input
+            type="input"
+            className={styles.formField}
+            placeholder="Name"
+            name="name"
+            id="name"
+            required
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <label htmlFor="name" className={styles.formLabel}>
+            Name
+          </label>
+        </div>
+      </div>
       <div className={styles.items}>
         {items.map((item: any) => (
           <div className={styles.item} key={item.title || item.name}>
