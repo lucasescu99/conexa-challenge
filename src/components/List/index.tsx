@@ -33,8 +33,10 @@ const List = ({ selectedEntity, apiUrl }: IListProps) => {
   useDebounce(
     () => {
       if (search) {
-        const newItems = items.filter((item) =>
-          item.name.toLowerCase().includes(search.toLowerCase()),
+        const newItems = items.filter(
+          (item) =>
+            item.name.toLowerCase().includes(search.toLowerCase()) ||
+            item.title.toLowerCase().includes(search.toLowerCase()),
         );
         setItems(newItems);
       } else {
